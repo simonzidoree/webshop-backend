@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using WebShop.Core.DomainServices;
+using WebShop.Core.Entities;
 using WebShop.Core.Entities;
 
 namespace WebShop.Core.ApplicationServices.Services
