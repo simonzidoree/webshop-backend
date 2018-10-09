@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using WebShop.Core.DomainServices;
 using WebShop.Core.Entities;
 
@@ -42,7 +43,10 @@ namespace WebShop.Infrastructure.Data.Repositories
 
         public Product Update(Product productUpdate)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(productUpdate).State = EntityState.Modified;
+            _ctx.Entry(productUpdate).Reference(p => p.Category).IsModified = true;
+            _ctx.SaveChanges();
+            return productUpdate;
         }
     }
 }

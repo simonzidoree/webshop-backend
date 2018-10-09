@@ -21,7 +21,7 @@ namespace WebShop.Core.ApplicationServices
         List<Product> GetAllProducts();
 
         //Update
-        Product UpdateProduct(int id, Product productUpdate);
+        Product UpdateProduct(Product productUpdate);
 
         //Delete
         Product DeleteProduct(int id);

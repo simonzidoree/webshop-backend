@@ -44,15 +44,15 @@ namespace WebShop.Core.ApplicationServices.Services
             return _productRepository.ReadAllProducts().ToList();
         }
 
-        public Product UpdateProduct(int id, Product productUpdate)
+        public Product UpdateProduct(Product productUpdate)
         {
-            var product = FindProductById(id);
+            var product = FindProductById(productUpdate.Id);
             product.Name = productUpdate.Name;
             product.Price = productUpdate.Price;
             product.Description = productUpdate.Description;
             product.Stock = productUpdate.Stock;
             product.ImageURL = productUpdate.ImageURL;
-            return product;
+            return _productRepository.Update(product);
         }
 
         public Product DeleteProduct(int id)
