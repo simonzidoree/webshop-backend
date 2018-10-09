@@ -18,12 +18,12 @@ namespace WebShop.Infrastructure.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Product> ReadAll()
+        public Product ReadById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Product ReadById(int id)
+        public IEnumerable<Product> ReadAllProducts()
         {
             throw new NotImplementedException();
         }
