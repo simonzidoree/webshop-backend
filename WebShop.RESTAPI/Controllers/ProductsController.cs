@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebShop.Core.ApplicationServices;
 using WebShop.Core.Entities;
@@ -12,15 +10,13 @@ namespace WebShop.RESTAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        
-        
-       private readonly IProductService _productService;
+        private readonly IProductService _productService;
 
         public ProductsController(IProductService customerService)
         {
             _productService = customerService;
         }
-        
+
         // GET api/customers -- READ All
         [HttpGet]
         public ActionResult<IEnumerable<Product>> Get()
@@ -32,8 +28,11 @@ namespace WebShop.RESTAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<Product> Get(int id)
         {
-            if (id < 1) return BadRequest("Id must be greater then 0");
-            
+            if (id < 1)
+            {
+                return BadRequest("Id must be greater then 0");
+            }
+
             return _productService.FindProductById(id);
         }
 
@@ -41,9 +40,16 @@ namespace WebShop.RESTAPI.Controllers
         [HttpPost]
         public ActionResult<Product> Post([FromBody] Product product)
         {
-            return _productService.CreateProduct(product);
+            try
+            {
+                return Ok(_productService.CreateProduct(product));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
-        
+
         // PUT api/customers/5 -- Update
         [HttpPut("{id}")]
         public ActionResult<Product> Put(int id, [FromBody] Product product)
@@ -65,5 +71,4 @@ namespace WebShop.RESTAPI.Controllers
             return Ok($"Product with Id: {id} is Deleted");
         }
     }
-    
 }

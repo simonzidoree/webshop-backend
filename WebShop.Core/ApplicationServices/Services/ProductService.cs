@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using WebShop.Core.DomainServices;
-using WebShop.Core.Entities;
 using WebShop.Core.Entities;
 
 namespace WebShop.Core.ApplicationServices.Services
@@ -31,6 +31,11 @@ namespace WebShop.Core.ApplicationServices.Services
 
         public Product CreateProduct(Product product)
         {
+            if (product.Category == null || product.Category.Id <= 0)
+            {
+                throw new InvalidDataException("To create a Product, you need a Category");
+            }
+
             return _productRepository.Create(product);
         }
 
