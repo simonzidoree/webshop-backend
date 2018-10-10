@@ -29,10 +29,11 @@ namespace WebShop.xUnitTest.Core.ApplicationServices.Services
             IProductService service =
                 new ProductService(productRepo.Object);
 
-            var product = new Product()
+            var product = new Product
             {
-                Category = new Category(){Id = 1}
+                Name = "Test"
             };
+
             service.CreateProduct(product);
             productRepo.Verify(x => x.Create(It.IsAny<Product>()), Times.Once);
         }
@@ -44,11 +45,14 @@ namespace WebShop.xUnitTest.Core.ApplicationServices.Services
             IProductService service =
                 new ProductService(productRepo.Object);
 
-            var product = new Product();
+            var product = new Product
+            {
+                Name = ""
+            };
 
             Exception ex = Assert.Throws<InvalidDataException>(() =>
                 service.CreateProduct(product));
-            Assert.Equal("To create a Product, you need a Category", ex.Message);
+            Assert.Equal("To create a Product, the Product needs a name", ex.Message);
         }
     }
 }

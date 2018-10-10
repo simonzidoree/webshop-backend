@@ -8,15 +8,6 @@ namespace WebShop.Infrastructure.Data
         {
             ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
-            var category1 = ctx.Categories.Add(new Category
-            {
-                Name = "Svensk Øl"
-            }).Entity;
-
-            var category2 = ctx.Categories.Add(new Category
-            {
-                Name = "Dansk Øl"
-            }).Entity;
 
             ctx.Products.Add(new Product
             {
@@ -24,8 +15,7 @@ namespace WebShop.Infrastructure.Data
                 Price = 749.99,
                 Description = "Super øl",
                 Stock = 10,
-                ImageURL = "Intet billede",
-                Category = category2
+                ImageURL = "Intet billede"
             });
 
             ctx.Products.Add(new Product
@@ -34,8 +24,7 @@ namespace WebShop.Infrastructure.Data
                 Price = 2500.00,
                 Description = "Super øl",
                 Stock = 10,
-                ImageURL = "Intet billede",
-                Category = category1
+                ImageURL = "Intet billede"
             });
 
             ctx.Products.Add(new Product
@@ -44,8 +33,7 @@ namespace WebShop.Infrastructure.Data
                 Price = 1249.99,
                 Description = "Super øl",
                 Stock = 10,
-                ImageURL = "Intet billede",
-                Category = category2
+                ImageURL = "Intet billede"
             });
             ctx.SaveChanges();
         }

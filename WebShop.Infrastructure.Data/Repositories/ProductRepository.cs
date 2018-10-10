@@ -44,7 +44,6 @@ namespace WebShop.Infrastructure.Data.Repositories
         public Product Update(Product productUpdate)
         {
             _ctx.Attach(productUpdate).State = EntityState.Modified;
-            _ctx.Entry(productUpdate).Reference(p => p.Category).IsModified = true;
             _ctx.SaveChanges();
             return productUpdate;
         }

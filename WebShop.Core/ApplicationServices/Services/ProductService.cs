@@ -31,9 +31,9 @@ namespace WebShop.Core.ApplicationServices.Services
 
         public Product CreateProduct(Product product)
         {
-            if (product.Category == null || product.Category.Id <= 0)
+            if (string.IsNullOrEmpty(product.Name))
             {
-                throw new InvalidDataException("To create a Product, you need a Category");
+                throw new InvalidDataException("To create a Product, the Product needs a name");
             }
 
             return _productRepository.Create(product);

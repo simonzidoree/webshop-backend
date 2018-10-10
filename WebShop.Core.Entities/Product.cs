@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WebShop.Core.Entities
+﻿namespace WebShop.Core.Entities
 {
     public class Product
     {
@@ -10,6 +8,5 @@ namespace WebShop.Core.Entities
         public string Description { get; set; }
         public int Stock { get; set; }
         public string ImageURL { get; set; }
-        public Category Category { get; set; }
     }
 }
