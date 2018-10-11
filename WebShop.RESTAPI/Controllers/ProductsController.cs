@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebShop.Core.ApplicationServices;
+using WebShop.Core.Entities;
 
 namespace WebShop.RESTAPI.Controllers
 {
@@ -10,36 +10,65 @@ namespace WebShop.RESTAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        // GET api/products
+        private readonly IProductService _productService;
+
+        public ProductsController(IProductService customerService)
+        {
+            _productService = customerService;
+        }
+
+        // GET api/customers -- READ All
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Product>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _productService.GetAllProducts();
         }
 
-        // GET api/products/5
+        // GET api/customers/5 -- READ By Id
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Product> Get(int id)
         {
-            return "value";
+            if (id < 1)
+            {
+                return BadRequest("Id must be greater then 0");
+            }
+
+            return _productService.FindProductById(id);
         }
 
-        // POST api/products
+        // POST api/customers -- CREATE JSON
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Product> Post([FromBody] Product product)
         {
+            try
+            {
+                return Ok(_productService.CreateProduct(product));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        // PUT api/products/5
+        // PUT api/customers/5 -- Update
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Product> Put(int id, [FromBody] Product product)
         {
+            if (id < 1 || id != product.Id)
+            {
+                return BadRequest("Parameter Id and product ID must be the same");
+            }
+
+            return Ok(_productService.UpdateProduct(product));
         }
 
-        // DELETE api/products/5
+        // DELETE api/customers/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Product> Delete(int id)
         {
+            var product = _productService.DeleteProduct(id);
+
+            return Ok($"Product with Id: {id} is Deleted");
         }
     }
 }
