@@ -47,5 +47,16 @@ namespace WebShop.Infrastructure.Data.Repositories
             _ctx.SaveChanges();
             return productUpdate;
         }
+
+        public IEnumerable<Product> ReadAll(Filter filter)
+        {
+            if(filter == null)
+            {
+                return _ctx.Products;
+            }
+            return _ctx.Products
+                .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
+                .Take(filter.ItemsPrPage);
+        }
     }
 }

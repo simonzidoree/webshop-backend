@@ -64,5 +64,10 @@ namespace WebShop.Core.ApplicationServices.Services
         {
             return _productRepository.Delete(id);
         }
+
+        public List<Product> GetFilteredList(Filter filter)
+        {
+            return _productRepository.ReadAll(filter).ToList();
+        }
     }
 }
