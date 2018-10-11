@@ -20,5 +20,7 @@ namespace WebShop.Core.DomainServices
 
         //Delete Data
         Product Delete(int id);
+
+        int Count();
     }
 }
