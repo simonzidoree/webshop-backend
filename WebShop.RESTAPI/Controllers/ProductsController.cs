@@ -19,9 +19,16 @@ namespace WebShop.RESTAPI.Controllers
 
         // GET api/customers -- READ All
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public ActionResult<IEnumerable<Product>> Get([FromQuery] Filter filter)
         {
-            return _productService.GetAllProducts();
+            try
+            {
+                return Ok(_productService.GetFilteredList(filter));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // GET api/customers/5 -- READ By Id

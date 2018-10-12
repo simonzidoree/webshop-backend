@@ -57,8 +57,8 @@ namespace WebShop.RESTAPI
 
             services.AddCors(opt =>
             {
-                opt.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://localhost:63342").AllowAnyHeader()
+                opt.AddPolicy("AllowAnyOrigin",
+                    builder => builder.AllowAnyOrigin().AllowAnyHeader()
                         .AllowAnyMethod());
             });
         }
@@ -86,7 +86,7 @@ namespace WebShop.RESTAPI
                 app.UseHsts();
             }
 
-            app.UseCors("AllowSpecificOrigin");
+            app.UseCors("AllowAnyOrigin");
 
             app.UseMvc();
         }

@@ -64,5 +64,18 @@ namespace WebShop.Core.ApplicationServices.Services
         {
             return _productRepository.Delete(id);
         }
+
+        public List<Product> GetFilteredList(Filter filter)
+        {
+            if (filter.CurrentPage < 0 || filter.ItemsPrPage < 0)
+            {
+                throw new InvalidDataException("CurrentPage and ItemsPage Must zero or more");
+            }
+            if ((filter.CurrentPage - 1 * filter.ItemsPrPage) >= _productRepository.Count())
+            {
+                throw new InvalidDataException("Index out bounds, CurrentPage is to high");
+            }
+            return _productRepository.ReadAll(filter).ToList();
+        }
     }
 }

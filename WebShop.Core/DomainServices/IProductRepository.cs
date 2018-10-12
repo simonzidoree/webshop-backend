@@ -13,11 +13,14 @@ namespace WebShop.Core.DomainServices
         //Read Data
         Product ReadById(int id);
         IEnumerable<Product> ReadAllProducts();
+        IEnumerable<Product> ReadAll(Filter filter = null);
 
         //Update Data
         Product Update(Product productUpdate);
 
         //Delete Data
         Product Delete(int id);
+
+        int Count();
     }
 }

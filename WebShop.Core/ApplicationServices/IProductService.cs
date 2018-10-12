@@ -20,10 +20,14 @@ namespace WebShop.Core.ApplicationServices
 
         List<Product> GetAllProducts();
 
+        List<Product> GetFilteredList(Filter filter);
+
         //Update
         Product UpdateProduct(Product productUpdate);
 
         //Delete
         Product DeleteProduct(int id);
+
+
     }
 }
